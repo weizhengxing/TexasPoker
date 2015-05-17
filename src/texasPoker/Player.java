@@ -71,7 +71,7 @@ public class Player {
 	}
 
 	private void gameOverMsgHandle() {
-
+		SocketConnection.CloseConnection();
 	}
 
 	private void blindMsgHandle() {
