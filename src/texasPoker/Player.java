@@ -3,6 +3,8 @@ package texasPoker;
 import java.io.IOException;
 import java.net.UnknownHostException;
 
+import javax.swing.text.html.HTMLDocument.Iterator;
+
 public class Player {
 	private int playerId = IpInfo.PlayerId;
 	private String playerName = "Meilier";
@@ -19,7 +21,7 @@ public class Player {
 	}
 
 	public String AnalysisMsg() { // 解析消息并处理消息
-		return msgType(SocketConnection.ReadMsg());
+		return SocketConnection.ReadMsg()[0];
 	}
 
 	public String msgType(String msg) { // 解析消息
@@ -67,7 +69,7 @@ public class Player {
 	}
 
 	private void seatInfoMsgHandle() {
-
+		
 	}
 
 	private void gameOverMsgHandle() {
@@ -75,15 +77,15 @@ public class Player {
 	}
 
 	private void blindMsgHandle() {
-
+		
 	}
 
 	private void holdCardMsgHandle() {
-
+		
 	}
 
 	private void inquireMsgHandle() {
-
+		SocketConnection.SendMsg(" all in ");
 	}
 
 	private void flopMsgHandle() {

@@ -1,6 +1,6 @@
 package texasPoker;
 
-public class Game {		//程序入口
+public class Cilent {		//程序入口
 
 	public static void main(String[] args) {
 		IpInfo.ServerIp = args[0];

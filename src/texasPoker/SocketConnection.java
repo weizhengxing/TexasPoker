@@ -10,7 +10,8 @@ import java.util.ArrayList;
 
 public class SocketConnection {
 	private static Socket player = null;// 静态类每个进程维护同一个链接
-	private static ArrayList<String> MsgType = new ArrayList();
+	private static StringBuilder mStringBuilder;
+	private static String MsgType[];
 	private static PrintWriter printWriter = null;
 	private static InputStreamReader streamReader = null;// InputStreamReader是低层和高层串流之间的桥梁
 	private static BufferedReader reader = null; // player.getInputStream()从Socket取得输入串流
@@ -40,18 +41,20 @@ public class SocketConnection {
 		return msg;
 	}
 
-	public static String ReadMsg() {
+	public static String[] ReadMsg() {
+		int i=0;
 		String servermsg = null;
 		try {
 			while ((servermsg = reader.readLine()) != null) {
-				MsgType.add(servermsg);
+				mStringBuilder.append(servermsg);				//添加消息
 			}
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		System.out.println("接收到服务器的消息 ：" + servermsg);
-		return servermsg;
+		//提取消息
+		MsgType=mStringBuilder.toString().split(" ");		
+		return MsgType;
 	}
 
 	public static void CloseConnection() {
@@ -63,7 +66,7 @@ public class SocketConnection {
 		}
 	}
 
-	public static ArrayList<String> getMsgList() {
+	public static String[] getMsgList() {
 		return MsgType;
 	}
 	public static Socket getSocket(){
