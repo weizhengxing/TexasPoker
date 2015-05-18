@@ -9,19 +9,17 @@ public class Player {
 	private int playerId = IpInfo.PlayerId;
 	private String playerName = "Meilier";
 	private int playerMoney;
-	SocketConnection mConnection = null;
 
 	public Player() {
-		mConnection = new SocketConnection();
-		RegMsg(playerId + " playerName");
+		new SocketConnection();
 	}
 
-	private String RegMsg(String msg) { // 向服务器注册自己的id和name
-		return SocketConnection.SendMsg(Message.REG_MSG + " " + msg + " \n");
+	public String RegMsg() { // 向服务器注册自己的id和name
+		return SocketConnection.SendMsg(Message.REG_MSG + " " + playerId + " playerName" + " \n");
 	}
 
 	public String AnalysisMsg() { // 解析消息并处理消息
-		return SocketConnection.ReadMsg()[0];
+		return msgType(SocketConnection.ReadMsg()[0]);
 	}
 
 	public String msgType(String msg) { // 解析消息
